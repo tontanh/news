@@ -1,0 +1,385 @@
+import 'package:exam/pages/homepage/style.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    final double _heightScreen = MediaQuery.of(context).size.height;
+    final _circleImage = _heightScreen / 14;
+    final _heightNews = _heightScreen / 8;
+    bool _pinned = false;
+    bool _snap = false;
+    bool _floating = false;
+    String _teacherName = 'ອຈ: ';
+    String _teacherId = 'ລະຫັດ';
+    String _teacherPosition = 'ຕຳແໜ່ງ: ';
+    String schoolname = 'ໂຮງຮຽນ ';
+    ImageProvider backgroundImage;
+    return Scaffold(
+      backgroundColor: Colors.blue,
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              elevation: 0,
+              pinned: _pinned,
+              snap: _snap,
+              floating: _floating,
+              expandedHeight: 250,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    border: Border.all(width: 0),
+                  ),
+                  child: SizedBox(
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 125),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  _teacherName,
+                                  style: kBigText,
+                                ),
+                                Text(
+                                  _teacherId,
+                                  style: kSmallText,
+                                ),
+                                Text(
+                                  _teacherPosition,
+                                  style: kSmallText,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            color: Colors.white,
+                            height: 60,
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 5),
+                            height: 100,
+                            width: 100,
+                            child: Stack(
+                              children: [
+                                Align(
+                                  child: Container(
+                                    height: 100,
+                                  ),
+                                  alignment: Alignment.bottomCenter,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        width: 3, color: Colors.white),
+                                    borderRadius:
+                                        BorderRadius.circular(_circleImage),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          blurRadius: 1),
+                                    ],
+                                  ),
+                                  child: CircleAvatar(
+                                    radius: _circleImage,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage: const AssetImage(
+                                        'assets/images/profile.png'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.notifications,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {},
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(width: 0),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 10, right: 10),
+                      height: _heightNews,
+                      // margin: EdgeInsets.all(10).copyWith(bottom: 0),
+                      decoration: BoxDecoration(
+                        color: kMainColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                        child: Text('ພາບໂຄສະນາ ຫລື ຂ່າວສານ'),
+                      ),
+                    ),
+                    Container(
+                      color: Colors.white,
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.all(5),
+                      child: Text(
+                        schoolname,
+                        style: kBigText.copyWith(color: Colors.black),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: GridView.count(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        crossAxisCount: 3,
+                        children: [
+                          menuItem(
+                            icon: const Icon(
+                              Icons.school,
+                              color: Colors.white,
+                            ),
+                            text: 'ຂໍ້ມູນນັກຮຽນ',
+                            onTap: () {},
+                          ),
+                          menuItem(
+                            icon: const Icon(
+                              Icons.calendar_today,
+                              color: Colors.white,
+                            ),
+                            text: 'ບັນທຶກມາການ',
+                            onTap: () {},
+                          ),
+                          menuItem(
+                            icon: const Icon(
+                              Icons.power_settings_new,
+                              color: Colors.white,
+                            ),
+                            text: 'ເປີດ-ປິດວິຊາ',
+                            onTap: () {},
+                          ),
+                          menuItem(
+                            icon: const Icon(
+                              Icons.home_work,
+                              color: Colors.white,
+                            ),
+                            text: 'ຄະແນນ',
+                            onTap: () {},
+                          ),
+                          menuItem(
+                            icon: const Icon(
+                              Icons.thumb_down,
+                              color: Colors.white,
+                            ),
+                            text: 'ນັກຮຽນຜິດລະບຽບ',
+                            onTap: () {},
+                          ),
+                          menuItem(
+                            icon: const Icon(
+                              Icons.rule,
+                              color: Colors.white,
+                            ),
+                            text: 'ໝາຍຂາດ',
+                            onTap: () {},
+                          ),
+                          menuItem(
+                            icon: const Icon(
+                              Icons.home_work,
+                              color: Colors.white,
+                            ),
+                            text: 'ວຽກບ້ານ',
+                            onTap: () {},
+                          ),
+                          menuItem(
+                            icon: const Icon(
+                              Icons.logout,
+                              color: Colors.white,
+                            ),
+                            text: 'ອອກຈາກລະບົບ',
+                            onTap: () async {},
+                            color: Colors.redAccent,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 100,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  InkWell menuItem(
+      {required Icon icon,
+      required String text,
+      required VoidCallback onTap,
+      Color color = Colors.blue}) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          CircleAvatar(
+            radius: 30,
+            backgroundColor: color,
+            child: icon,
+          ),
+          Text(
+            text,
+            style: const TextStyle(color: Colors.black),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
+  bgtop() {
+    return Container(
+        padding: EdgeInsets.only(
+          left: 20,
+          top: 10,
+        ),
+        child: SingleChildScrollView(
+          child: Row(
+            //  mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Center(
+                      child: Text(
+                    'ເລືອກວັນທີ່ : ',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                        fontSize: 16),
+                  )),
+                  InkWell(
+                    onTap: () {
+                      _selectDate(context);
+                    },
+                    child: Container(
+                      // padding: EdgeInsets.only(left: 20),
+                      decoration: BoxDecoration(
+                          color: Color(0xffF5F5F5),
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      height: 40,
+                      width: 170,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                        child: Center(
+                            child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 15, right: 15),
+                              child: Text(
+                                datecontroler.text == null ||
+                                        datecontroler.text == ''
+                                    ? Datenow().dateyear()
+                                    : datecontroler.text,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: Colors.blue),
+                              ),
+                            ),
+                            Container(
+                              width: 50,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.blue,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'ຄົ້ນຫາ',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ));
+  }
+
+
+
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2030),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        timeday = '${selectedDate.toLocal()}'.split(' ')[0];
+        //    timeday = '${selectedDate.toLocal()}'
+        datecontroler.text = timeday!;
+        setState(() {
+          roomdatesearch.text =
+              datecontroler.text == null || datecontroler.text == ''
+                  ? Datenow().dateyear()
+                  : datecontroler.text;
+          print(roomdatesearch.text);
+          datetimeget.dateTime = roomdatesearch.text;
+        });
+      });
+    }
+  }
